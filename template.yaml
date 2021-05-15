@@ -37,7 +37,7 @@ Parameters:
       - GitHub
       # - CodeCommit
   GitHubRepo:
-    Description: GitHub repo name
+    Description: GitHub repo name. Should be in the format owner/repo.
     Type: String
     Default: ''
   GitHubBranch:
@@ -176,7 +176,7 @@ Resources:
                 Configuration:
                   !If
                   - HasSNSTopic
-                  - NotificationArn: !Ref SNSTopic
+                  - NotificationArn: !Sub arn:${AWS::Partition}:sns:${AWS::Region}:${AWS::AccountId}:${SNSTopic}
                   - !Ref AWS::NoValue
                 RunOrder: 1
           - !Ref AWS::NoValue
