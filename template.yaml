@@ -174,7 +174,10 @@ Resources:
                   Provider: Manual
                   Version: "1"
                 Configuration:
-                  NotificationArn: !Ref SNSTopic
+                  !If
+                  - HasSNSTopic
+                  - NotificationArn: !Ref SNSTopic
+                  - !Ref AWS::NoValue
                 RunOrder: 1
           - !Ref AWS::NoValue
         - !If
